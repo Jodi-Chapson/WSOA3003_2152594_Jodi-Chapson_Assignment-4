@@ -6,17 +6,32 @@ public class UIMenus : MonoBehaviour
 {
 
     public GameObject TargetUI;
+    public GameObject CreditsUI;
 
     public GameObject targettext1, targettext2;
 
-    public void ToggleUIOn()
+    public void ToggleUIOn(int type)
     {
-        TargetUI.SetActive(true);
+        if (type == 1)
+        {
+            TargetUI.SetActive(true);
+        }
+        else
+        {
+            CreditsUI.SetActive(true);
+        }
     }
 
-    public void ToggleUIOff()
+    public void ToggleUIOff(int type)
     {
-        TargetUI.SetActive(false);
+        if (type == 1)
+        {
+            TargetUI.SetActive(false);
+        }
+        else
+        {
+            CreditsUI.SetActive(false);
+        }
     }
 
     public void ToggleNextPage()
