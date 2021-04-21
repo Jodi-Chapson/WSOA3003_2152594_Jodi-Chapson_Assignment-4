@@ -10,34 +10,32 @@ public enum BattleState { OUTCOMBAT, START, PLAYERTURN, ENEMYTURN, END }
 
 public class StateMachine : MonoBehaviour
 {
+	[Header("Player and Enemy References")]
 	public GameObject player, enemy;
 	public Chara_Info playerinfo, enemyinfo;
 	public Transform playerPos, enemypos, camplacement;
 	public Vector3 playerlastPos, enemylastPos, camlastpos;
-	public BattleState state;
 	public CharacterMovement playermove;
-	public CamController cam;
-	public Animator fadeanim;
-	public BattleMenu BM;
-	public GameObject key, support;
-
-
-	public GameObject door;
-	public Sprite openeddoor;
-	public GameObject endscreen;
-	public Support supp;
-
-
 	public Slider enemyhealth;
 	public Image enemydamagetype;
 	public Image enemyhead;
 
-
-	public Sprite fire, normaldmg;
-	public Sprite eyehead, firehead;
+	[Header("Menus and UI")]
+	public BattleMenu BM;
+	public GameObject endscreen;
 	public MiscScript misc;
 
 
+	[Header("Misc")]
+	public BattleState state;
+	public Animator fadeanim;
+	public GameObject key, support;
+	public GameObject door;
+	public Sprite openeddoor;
+	public Support supp;
+	public Sprite fire, normaldmg;
+	public Sprite eyehead, firehead;
+	public CamController cam;
 	public GameObject DamFig;
 	public int healthbonus;
 
@@ -50,10 +48,6 @@ public class StateMachine : MonoBehaviour
 		state = BattleState.OUTCOMBAT;
 		
 	}
-
-
-
-	
 
 	public IEnumerator BattleSetup()
 	{
@@ -134,7 +128,7 @@ public class StateMachine : MonoBehaviour
 				
 			}
 
-			Destroy(dam, 2);
+			Destroy(dam, 3);
 			
 
 		}
@@ -207,6 +201,7 @@ public class StateMachine : MonoBehaviour
 
 
 		yield return new WaitForSeconds(0.5f);
+		state = BattleState.OUTCOMBAT;
 
 
 
@@ -237,7 +232,7 @@ public class StateMachine : MonoBehaviour
 
 		playermove.playeranim.Play("attack", 0, 0.0f);
 
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(0.8f);
 
 		DamagePop(4);
 		enemyinfo.currentHP -= playerinfo.damage;
@@ -268,7 +263,7 @@ public class StateMachine : MonoBehaviour
 		//yield return new WaitForSeconds(0.5f);
 		playermove.playeranim.Play("attack", 0, 0.0f);
 
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(0.8f);
 
 
 		if (enemyinfo.type == 1) //base enemy
@@ -312,7 +307,7 @@ public class StateMachine : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 
 		enemyinfo.GetComponentInChildren<Animator>().Play("attack", 0, 0.0f);
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.8f);
 		DamagePop(2);
 		playerinfo.currentHP -= enemyinfo.damage;
 		playermove.playeranim.Play("flinch", 0, 0.0f);

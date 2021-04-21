@@ -16,6 +16,8 @@ public class MiscScript : MonoBehaviour
 
     public GameObject purplekey;
     public bool upgraded;
+
+    public ParticleSystem vfx;
     void Start()
     {
 
@@ -115,5 +117,11 @@ public class MiscScript : MonoBehaviour
     public void ToggleKey()
     {
         purplekey.SetActive(true);
+    }
+
+
+    public void PlayVFX()
+    {
+        vfx.Play();
     }
 }
