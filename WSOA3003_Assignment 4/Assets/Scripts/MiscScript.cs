@@ -45,7 +45,7 @@ public class MiscScript : MonoBehaviour
     {
         if (!upgraded)
         { dummy.gameObject.SetActive(true);
-            dummy.transform.position = new Vector3(state.enemylastPos.x, state.enemylastPos.y, state.enemylastPos.z);
+            dummy.transform.position = new Vector3(state.enemylastPos.x, state.enemylastPos.y + 2, state.enemylastPos.z);
             upgraded = true;
         }
 

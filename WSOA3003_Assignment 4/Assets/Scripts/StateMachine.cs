@@ -24,6 +24,11 @@ public class StateMachine : MonoBehaviour
 	public BattleMenu BM;
 	public GameObject endscreen;
 	public MiscScript misc;
+	public GameObject coinUI;
+	public Text coincounter;
+	public int TotalCoins;
+	public float currentCD;
+	public float totalCD;
 
 
 	[Header("Misc")]
@@ -41,6 +46,9 @@ public class StateMachine : MonoBehaviour
 
 	public int starthealth;
 	public int finishhealth;
+
+
+
 
 
 	public void Start()
@@ -188,7 +196,7 @@ public class StateMachine : MonoBehaviour
 		cam.transform.position = camlastpos;
 
 		Vector3 newpos = new Vector3((-enemylastPos.x + 2*playerlastPos.x), (-enemylastPos.y + 2*playerlastPos.y), 0);
-		playerinfo.currentHP -= 1;
+		//playerinfo.currentHP -= 1;
 		
 		//a basic highschool maths formula that took me way too long to get haha
 		player.transform.position = newpos;
@@ -353,12 +361,18 @@ public class StateMachine : MonoBehaviour
 				BM.Togglespecialskill();
 				misc.UpgradeWater();
 
+
+				StartCoroutine(CoinsAnimated(1));
+				
+
 			}
 			else if (enemyinfo.type == 2)
 			{
 				misc.ToggleKey();
 
-				//yield return new WaitForSeconds(0.5f);
+				StartCoroutine(CoinsAnimated(2));
+
+
 				//endscreen.SetActive(true);
 
 			}
@@ -405,6 +419,7 @@ public class StateMachine : MonoBehaviour
 
 
 
+		
 
 		yield return new WaitForSeconds(0.1f);
 
@@ -433,6 +448,84 @@ public class StateMachine : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.5f);
 		endscreen.SetActive(true);
+	}
+
+
+	public IEnumerator CoinsAnimated(int type)
+	{
+		yield return new WaitForSeconds(0.5f);
+
+		if (type == 1)
+	
+		{
+			AddCoins(1);
+
+			yield return new WaitForSeconds(0.3f);
+
+			AddCoins(2);
+
+			yield return new WaitForSeconds(0.3f);
+
+			AddCoins(2);
+
+			yield return new WaitForSeconds(0.2f);
+
+			AddCoins(2);
+		}
+		else 
+		{
+			AddCoins(2);
+
+			yield return new WaitForSeconds(0.3f);
+
+			AddCoins(3);
+
+			yield return new WaitForSeconds(0.3f);
+
+			AddCoins(3);
+
+			yield return new WaitForSeconds(0.2f);
+
+			AddCoins(2);
+
+			
+		}
+
+
+
+
+	}
+
+
+	public void AddCoins(int add)
+	{
+		coinUI.SetActive(true);
+		currentCD = totalCD;
+		TotalCoins = add + TotalCoins;
+
+
+		coincounter.text = TotalCoins.ToString();
+
+	}
+
+	public void Update()
+	{
+
+		if (coinUI.activeSelf == true)
+		{
+			currentCD -= 0.1f;
+
+			if (currentCD <= 0)
+			{
+				coinUI.SetActive(false);
+			}
+		}
+
+
+
+
+
+
 	}
 
 
