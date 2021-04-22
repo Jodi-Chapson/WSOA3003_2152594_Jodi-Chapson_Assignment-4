@@ -8,6 +8,7 @@ public class Support : MonoBehaviour
     public bool isDummy;
     public MiscScript misc;
     public int clicks;
+    public bool on;
 
 
     public bool canfollow;
@@ -34,8 +35,14 @@ public class Support : MonoBehaviour
         {
             if (Input.GetKeyDown("e"))
             {
-                misc.ToggleInstructions(1);
-                misc.prompt.SetActive(false);
+                if (!on)
+                {
+
+
+                    misc.ToggleInstructions(1);
+                    misc.prompt.SetActive(false);
+                    on = true;
+                }
             }
 
 

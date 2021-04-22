@@ -3661,6 +3661,7 @@ MonoBehaviour:
   isDummy: 0
   misc: {fileID: 0}
   clicks: 0
+  on: 0
   canfollow: 0
   sprite: {fileID: 9094035750915313960}
 --- !u!212 &9094035750915313960

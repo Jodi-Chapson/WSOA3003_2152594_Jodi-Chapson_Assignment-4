@@ -30,6 +30,9 @@ public class StateMachine : MonoBehaviour
 	public float currentCD;
 	public float totalCD;
 	public GameObject alt1, alt2;
+	public GameObject pmenu;
+	public bool paused;
+	public bool ended;
 
 	[Header("Misc")]
 	public BattleState state;
@@ -54,6 +57,7 @@ public class StateMachine : MonoBehaviour
 	public void Start()
 	{
 		state = BattleState.OUTCOMBAT;
+		paused = false;
 		
 	}
 
@@ -416,6 +420,7 @@ public class StateMachine : MonoBehaviour
 
 			endscreen.SetActive(true);
 			alt2.SetActive(true);
+			ended = true;
 		}
 
 
@@ -450,6 +455,7 @@ public class StateMachine : MonoBehaviour
 		yield return new WaitForSeconds(0.5f);
 		endscreen.SetActive(true);
 		alt1.SetActive(true);
+		ended = true;
 	}
 
 
@@ -524,11 +530,41 @@ public class StateMachine : MonoBehaviour
 		}
 
 
-
+		if (Input.GetKeyDown("escape"))
+		{
+			if (!ended)
+			{
+				if (!paused)
+				{
+					Paused(1);
+				}
+				else
+				{
+					Paused(2);
+				}
+			}
+		}
 
 
 
 	}
+
+	public void Paused(int toggle)
+	{
+		if (toggle == 1)
+		{ pmenu.SetActive(true);
+			playermove.canmove = false;
+			paused = true;
+		}
+		else if (toggle == 2)
+		{
+			pmenu.SetActive(false);
+			playermove.canmove = true;
+			paused = false;
+		}
+	}
+
+
 
 
 
