@@ -29,7 +29,7 @@ public class StateMachine : MonoBehaviour
 	public int TotalCoins;
 	public float currentCD;
 	public float totalCD;
-
+	public GameObject alt1, alt2;
 
 	[Header("Misc")]
 	public BattleState state;
@@ -415,6 +415,7 @@ public class StateMachine : MonoBehaviour
 		{
 
 			endscreen.SetActive(true);
+			alt2.SetActive(true);
 		}
 
 
@@ -448,6 +449,7 @@ public class StateMachine : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.5f);
 		endscreen.SetActive(true);
+		alt1.SetActive(true);
 	}
 
 
